@@ -3,15 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace APIKs.Models {
-    public class Products {
+    [Table("Recipes")]
+    public class Recipe {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductID {get; set;}
+        public int RecipeID {get; set;}
+
+        [Required]
         public string Name {get; set;}
-        public float Carbohydrates {get; set;}
-        public float Proteins {get; set;}
-        public float Fats {get; set;}
-        public float Kcal {get; set;}
-        public string Note {get; set;}
+
+        [Required]
+        public string Description {get; set;}
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Likes {get; set;} = 0;
     }
 }
