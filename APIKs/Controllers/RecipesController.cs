@@ -40,8 +40,8 @@ namespace APIKs.Controllers {
             return recipes;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByAuthor([FromQuery] string userName) {
+        [HttpGet("by/{userName}")]
+        public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByAuthor(string userName) {
             string userLogin = _context.Users.Where( user => user.Name.Equals(userName)).First().Login;
             var byAuthor = await _context.RecipesAuthors.Where( recipesauthors => recipesauthors.Login.Equals(userLogin) ).ToListAsync();
             List<Recipe> list = new List<Recipe>();
@@ -50,6 +50,10 @@ namespace APIKs.Controllers {
             }
             return list;
         }
+
+        [HttpGet("{id}/categories")]
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesInRecipe(int id)
+
 
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe([FromBody] string data, [FromHeader] string userLogin) {
@@ -61,6 +65,8 @@ namespace APIKs.Controllers {
             foreach(int productid in productids) {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
+            string category = json["Category"];
+            _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, Category = category});
 
             _context.RecipesAuthors.Add(new RecipesAuthors {RecipeID = recipe.RecipeID, Login = userLogin});
             

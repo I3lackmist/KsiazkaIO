@@ -1,0 +1,22 @@
+Przepisy z kategorii /
+Przepisy od autora / 
+Przepisy wszystkie /
+Wyslanie przepisu i produktow w nim /
+Przepis z ID /
+Kategorie w przepisie 
+Produkty w przepisie
+Usuniecie przepisu
+Komentarze pod przepisami
+
+Ulubione przepisy
+
+Artykuly i ich autorzy
+Artykuly od autora
+Komentarze pod artykulami
+
+Zbanowanie uzytkownika
+Stworzenie uzytkownika
+
+Dodanie moderatora
+
+Dodanie produktu z .jsona
