@@ -14,8 +14,6 @@ namespace APIKs.Models {
 
         [Required]
         public string Description {get; set;}
-        
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Likes {get; set;} = 0;
     }
 }

@@ -9,6 +9,7 @@ using APIKs.Data;
 using APIKs.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace APIKs.Controllers {
     [Route("api/[controller]")]
@@ -32,7 +33,7 @@ namespace APIKs.Controllers {
 
         [HttpGet("category/{category}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByCategory(string category) {
-            var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.Category.Equals(category)).ToListAsync();
+            var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.CategoryName.Equals(category)).ToListAsync();
             List<Recipe> recipes = new List<Recipe>();
             foreach (RecipesCategories entry in inCategory) {
                 recipes.Append(_context.Recipes.Find(entry.RecipeID));
@@ -52,26 +53,40 @@ namespace APIKs.Controllers {
         }
 
         [HttpGet("{id}/categories")]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesInRecipe(int id)
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesInRecipe(int id) {
+            List<Category> categories = new List<Category>();
+            var recipescategories = await _context.RecipesCategories.Where(rc => rc.RecipeID == id).ToListAsync();
+            foreach (RecipesCategories entry in recipescategories) {
+                categories.Append(new Category{CategoryName = entry.CategoryName});
+            }
+            return categories;
+        }
 
 
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] string data, [FromHeader] string userLogin) {
-            dynamic json = JsonConvert.DeserializeObject(data);
+        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] JsonElement data) {
+            string jsonstr = System.Text.Json.JsonSerializer.Serialize(data);
+            dynamic json = JsonConvert.DeserializeObject(jsonstr);
             Recipe recipe = new Recipe { Name = json["Name"], Description = json["Description"]};
             _context.Recipes.Add(recipe);
             
-            int[] productids = json["RecipeIDs"];
-            foreach(int productid in productids) {
+            await _context.SaveChangesAsync();
+            
+            Newtonsoft.Json.Linq.JArray productids = json["ProductIDs"];
+            List<int> idarray = productids.ToObject<List<int>>();
+            string uname = json["UserName"];
+            foreach(int productid in idarray) {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
-            string category = json["Category"];
-            _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, Category = category});
+            
 
-            _context.RecipesAuthors.Add(new RecipesAuthors {RecipeID = recipe.RecipeID, Login = userLogin});
+            string category = json["Category"];
+            _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
+
+            _context.RecipesAuthors.Add(new RecipesAuthors {RecipeID = recipe.RecipeID, Login = uname});
             
             await _context.SaveChangesAsync();
-            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, login = userLogin }, recipe);
+            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, login = uname }, recipe);
         }
 
 

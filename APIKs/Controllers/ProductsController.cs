@@ -23,7 +23,7 @@ namespace APIKs.Controllers {
             return await _context.Products.ToListAsync();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct([FromBody] int id) {
             var product = await _context.Products.FindAsync(id);
 
@@ -34,8 +34,8 @@ namespace APIKs.Controllers {
             return product;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct([FromBody] string name) {
+        [HttpGet("name")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct([FromQuery] string name) {
             var products = await _context.Products.Where(product => product.Name.Contains(name)).ToListAsync();
             if (products == null) {
                 return NotFound();

@@ -3,12 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace APIKs.Models {
+    [Table("ArticleCommentUser")]
     public class ArticleCommentUser {
-        [Key]
+        [Required]
         public int ArticleCommentID {get; set;}
-        [Key]
+
+        [Required]
         public int ArticleID {get; set;}
-        [Key]
+
+        [Required]
         public string Login {get; set;}
     }
 }

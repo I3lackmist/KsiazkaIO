@@ -25,6 +25,6 @@ namespace APIKs.Models {
         [Required]
         public float Kcal {get; set;}
 
-        public string Note {get; set;}
+        public string Note {get; set;} = "";
     }
 }

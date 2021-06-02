@@ -7,7 +7,8 @@ namespace APIKs.Models {
     public class Moderator {
         [Key]
         public string Login {get; set;}
+
         [Required]
-        public DateTime dateSince {get; set;}
+        public DateTime DateSince {get; set;}
     }
 }
