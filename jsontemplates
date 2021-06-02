@@ -1,0 +1,32 @@
+Product
+{
+    "Name":"",
+    "Carbohydrates":,
+    "Proteins":,
+    "Fats":,
+    "Kcal":,
+    "Note":""
+}
+
+Recipe
+{
+    "Name":"",
+    "Description":"",
+    "Category":"",
+    "UserName":"",
+    "ProductIDs":[]
+}
+
+Category
+{
+    "Name":""
+}
+
+User
+{
+    "Login":"",
+    "Email":"",
+    "Password":"",
+    "Name":"",
+    "DateRegistered":""
+}

@@ -31,23 +31,13 @@ namespace APIKs.Controllers {
             return await _context.Recipes.FindAsync(id);
         }
 
-        [HttpGet("category/{category}")]
-        public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByCategory(string category) {
-            var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.CategoryName.Equals(category)).ToListAsync();
-            List<Recipe> recipes = new List<Recipe>();
-            foreach (RecipesCategories entry in inCategory) {
-                recipes.Append(_context.Recipes.Find(entry.RecipeID));
-            }
-            return recipes;
-        }
-
         [HttpGet("by/{userName}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByAuthor(string userName) {
-            string userLogin = _context.Users.Where( user => user.Name.Equals(userName)).First().Login;
-            var byAuthor = await _context.RecipesAuthors.Where( recipesauthors => recipesauthors.Login.Equals(userLogin) ).ToListAsync();
+            var byAuthor = await _context.RecipesAuthors.Where( recipesauthors => recipesauthors.Login.Equals(userName) ).ToListAsync();
             List<Recipe> list = new List<Recipe>();
+
             foreach (RecipesAuthors entry in byAuthor) {
-                list.Append(_context.Recipes.Find(entry.RecipeID));
+                list.Add(_context.Recipes.Find(entry.RecipeID));
             }
             return list;
         }
@@ -57,11 +47,10 @@ namespace APIKs.Controllers {
             List<Category> categories = new List<Category>();
             var recipescategories = await _context.RecipesCategories.Where(rc => rc.RecipeID == id).ToListAsync();
             foreach (RecipesCategories entry in recipescategories) {
-                categories.Append(new Category{CategoryName = entry.CategoryName});
+                categories.Add(new Category{ CategoryName = entry.CategoryName });
             }
             return categories;
         }
-
 
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe([FromBody] JsonElement data) {
@@ -79,7 +68,6 @@ namespace APIKs.Controllers {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
             
-
             string category = json["Category"];
             _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
 
@@ -101,8 +89,18 @@ namespace APIKs.Controllers {
                 //Moderator check
                 return NoContent();
             }
+
+            RecipesCategories recipescategoriesentry = _context.RecipesCategories.Where(recipe => recipe.RecipeID.Equals(id)).First();
+
+            List<RecipesProducts> recipeproductlist = await _context.RecipesProducts.Where(recipe => recipe.RecipeID.Equals(id)).ToListAsync();
+
             _context.Recipes.Remove(recipe);
             _context.RecipesAuthors.Remove(recipesauthorsentry);
+            _context.RecipesCategories.Remove(recipescategoriesentry);
+            foreach(RecipesProducts entry in recipeproductlist) {
+                _context.Remove(entry);
+            }
+            
             await _context.SaveChangesAsync();
             return NoContent();
         }

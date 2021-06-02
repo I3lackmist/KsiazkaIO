@@ -3,9 +3,9 @@ Przepisy od autora /
 Przepisy wszystkie /
 Wyslanie przepisu i produktow w nim /
 Przepis z ID /
-Kategorie w przepisie 
-Produkty w przepisie
-Usuniecie przepisu
+Kategorie w przepisie /
+Produkty w przepisie 
+Usuniecie przepisu 
 Komentarze pod przepisami
 
 Ulubione przepisy
@@ -15,7 +15,7 @@ Artykuly od autora
 Komentarze pod artykulami
 
 Zbanowanie uzytkownika
-Stworzenie uzytkownika
+Stworzenie uzytkownika /
 
 Dodanie moderatora
 
