@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,10 @@ namespace APIKs.Controllers {
         public async Task<ActionResult<User>> CreateUser ([FromBody] User user) {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/Data/Users");
+            Directory.CreateDirectory(string.Concat(dbdir,"/",user.Login));
+            
+
             return CreatedAtAction("CreateUser", new{ login = user.Login, name = user.Name }, user);
         }
     }

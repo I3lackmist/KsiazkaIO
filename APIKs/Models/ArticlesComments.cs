@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace APIKs.Models {
-    [Table("ArticleAuthor")]
-    public class ArticleAuthor {
+    [Table("ArticlesComments")]
+    public class ArticlesComments {
         [Required]
-        public string Login {get; set;}
+        public int ArticleCommentID {get; set;}
 
         [Required]
         public int ArticleID {get; set;}

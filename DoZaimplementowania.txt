@@ -4,9 +4,9 @@ Przepisy wszystkie /
 Wyslanie przepisu i produktow w nim /
 Przepis z ID /
 Kategorie w przepisie /
-Produkty w przepisie 
-Usuniecie przepisu 
-Komentarze pod przepisami
+Produkty w przepisie / 
+Usuniecie przepisu /
+Komentarze pod przepisami /
 
 Ulubione przepisy
 

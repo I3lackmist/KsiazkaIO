@@ -6,6 +6,7 @@ CREATE TABLE Recipes(
 RecipeID INTEGER PRIMARY KEY AUTOINCREMENT,
 Name TEXT NOT NULL,
 Description TEXT NOT NULL,
+Author TEXT NOT NULL,
 Likes INTEGER NOT NULL
 );
 
@@ -41,13 +42,15 @@ DateUntil REAL NOT NULL
 CREATE TABLE Articles(
 ArticleID INTEGER PRIMARY KEY AUTOINCREMENT,
 Title TEXT NOT NULL,
-Body TEXT NOT NULL
+Body TEXT NOT NULL,
+Author TEXT NOT NULL
 );
 
 CREATE TABLE RecipeComments(
 RecipeCommentID INTEGER PRIMARY KEY AUTOINCREMENT,
 Body TEXT NOT NULL,
 Date REAL NOT NULL,
+Author TEXT NOT NULL,
 Likes INTEGER NOT NULL
 );
 
@@ -55,6 +58,7 @@ CREATE TABLE ArticleComments(
 ArticleCommentID INTEGER PRIMARY KEY AUTOINCREMENT,
 Body TEXT NOT NULL,
 Date REAL NOT NULL,
+Author TEXT NOT NULL,
 Likes INTEGER NOT NULL
 );
 
@@ -77,22 +81,14 @@ Login TEXT NOT NULL,
 PRIMARY KEY(ArticleID, Login)
 );
 
-CREATE TABLE RecipeCommentUser(
+CREATE TABLE RecipesComments(
 RecipeID INTEGER NOT NULL,
 RecipeCommentID INTEGER NOT NULL,
-Login TEXT NOT NULL,
-PRIMARY KEY(RecipeID, RecipeCommentID, Login)
+PRIMARY KEY(RecipeID, RecipeCommentID)
 );
 
-CREATE TABLE ArticleCommentUser(
+CREATE TABLE ArticlesComments(
 ArticleID INTEGER NOT NULL,
 ArticleCommentID INTEGER NOT NULL,
-Login TEXT NOT NULL,
-PRIMARY KEY(ArticleID, ArticleCommentID, Login)
-);
-
-CREATE TABLE RecipesAuthors (
-RecipeID INTEGER NOT NULL,
-Login TEXT NOT NULL, 
-PRIMARY KEY(RecipeID, Login)
+PRIMARY KEY(ArticleID, ArticleCommentID)
 );

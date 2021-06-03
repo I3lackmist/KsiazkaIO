@@ -15,6 +15,9 @@ namespace APIKs.Models {
         [Required]
         public DateTime Date {get; set;}
 
+        [Required]
+        public string Author {get; set;}
+
         public int Likes {get; set;} = 0;
     }
 }

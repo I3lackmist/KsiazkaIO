@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace APIKs.Models {
-    [Table("RecipesAuthors")]
-    public class RecipesAuthors {
+    [Table("RecipesComments")]
+    public class RecipesComments {
+        [Required]
+        public int RecipeCommentID {get; set;}
+        
         [Required]
         public int RecipeID {get; set;}
-
-        [Required]
-        public string Login {get; set;}
     }
 }

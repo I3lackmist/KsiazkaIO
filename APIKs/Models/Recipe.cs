@@ -14,6 +14,10 @@ namespace APIKs.Models {
 
         [Required]
         public string Description {get; set;}
+
+        [Required]
+        public string Author {get; set;}
+        
         public int Likes {get; set;} = 0;
     }
 }

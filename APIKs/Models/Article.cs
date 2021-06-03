@@ -14,5 +14,8 @@ namespace APIKs.Models {
         
         [Required]
         public string Body {get; set;}
+
+        [Required]
+        public string Author {get; set;}
     }
 }

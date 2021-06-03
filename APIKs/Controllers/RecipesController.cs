@@ -33,37 +33,52 @@ namespace APIKs.Controllers {
 
         [HttpGet("by/{userName}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByAuthor(string userName) {
-            var byAuthor = await _context.RecipesAuthors.Where( recipesauthors => recipesauthors.Login.Equals(userName) ).ToListAsync();
-            List<Recipe> list = new List<Recipe>();
-
-            foreach (RecipesAuthors entry in byAuthor) {
-                list.Add(_context.Recipes.Find(entry.RecipeID));
-            }
-            return list;
+            var byAuthor = await _context.Recipes.Where( recipe => recipe.Author.Equals(userName) ).ToListAsync();
+            return byAuthor;
         }
 
         [HttpGet("{id}/categories")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategoriesInRecipe(int id) {
             List<Category> categories = new List<Category>();
             var recipescategories = await _context.RecipesCategories.Where(rc => rc.RecipeID == id).ToListAsync();
-            foreach (RecipesCategories entry in recipescategories) {
+            foreach (var entry in recipescategories) {
                 categories.Add(new Category{ CategoryName = entry.CategoryName });
             }
             return categories;
         }
 
+        [HttpGet("{id}/products")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductsInRecipe(int id) {
+            List<Product> products = new List<Product>();
+            var recipesproducts = await _context.RecipesProducts.Where(rp => rp.RecipeID == id).ToListAsync();
+            foreach (var entry in recipesproducts) {
+                products.Add(_context.Products.Find(entry.ProductID));
+            }
+            return products;
+        }
+
+        [HttpGet("{id}/comments")]
+        public async Task<ActionResult<IEnumerable<RecipeComment>>> GetRecipeComments(int id) {
+            var rcu = await _context.RecipesComments.Where( rscs => rscs.RecipeID == id).ToListAsync();
+            List<RecipeComment> comments = new List<RecipeComment>();
+            foreach(var entry in rcu) {
+                comments.Add(_context.RecipeComments.Find(entry.RecipeCommentID));
+            }
+            return comments;
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] JsonElement data) {
+        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] JsonElement data, [FromHeader] string userName) {
             string jsonstr = System.Text.Json.JsonSerializer.Serialize(data);
             dynamic json = JsonConvert.DeserializeObject(jsonstr);
-            Recipe recipe = new Recipe { Name = json["Name"], Description = json["Description"]};
+            Recipe recipe = new Recipe { Name = json["Name"], Description = json["Description"], Author = userName };
             _context.Recipes.Add(recipe);
             
             await _context.SaveChangesAsync();
             
             Newtonsoft.Json.Linq.JArray productids = json["ProductIDs"];
             List<int> idarray = productids.ToObject<List<int>>();
-            string uname = json["UserName"];
+
             foreach(int productid in idarray) {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
@@ -71,36 +86,38 @@ namespace APIKs.Controllers {
             string category = json["Category"];
             _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
 
-            _context.RecipesAuthors.Add(new RecipesAuthors {RecipeID = recipe.RecipeID, Login = uname});
-            
             await _context.SaveChangesAsync();
-            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, login = uname }, recipe);
+            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, login = userName }, recipe);
         }
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipe([FromHeader] string userLogin, int id) {
+        public async Task<IActionResult> DeleteRecipe([FromHeader] string userName, int id) {
             Recipe recipe = await _context.Recipes.FindAsync(id);
             if(recipe == null) {
                 return NotFound();
             }
-            RecipesAuthors recipesauthorsentry = _context.RecipesAuthors.Where(recipe => recipe.RecipeID.Equals(id)).First();
-            if(!recipesauthorsentry.Login.SequenceEqual(userLogin)) {
-                //Moderator check
-                return NoContent();
-            }
-
-            RecipesCategories recipescategoriesentry = _context.RecipesCategories.Where(recipe => recipe.RecipeID.Equals(id)).First();
-
-            List<RecipesProducts> recipeproductlist = await _context.RecipesProducts.Where(recipe => recipe.RecipeID.Equals(id)).ToListAsync();
-
+            //Mod check
             _context.Recipes.Remove(recipe);
-            _context.RecipesAuthors.Remove(recipesauthorsentry);
-            _context.RecipesCategories.Remove(recipescategoriesentry);
-            foreach(RecipesProducts entry in recipeproductlist) {
-                _context.Remove(entry);
+
+            try {
+                RecipesCategories recipescategoriesentry = _context.RecipesCategories.Where(recipe => recipe.RecipeID.Equals(id)).First();
+                _context.RecipesCategories.Remove(recipescategoriesentry);
             }
-            
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            try {
+                List<RecipesProducts> recipeproductlist = await _context.RecipesProducts.Where(recipe => recipe.RecipeID.Equals(id)).ToListAsync();
+                foreach(RecipesProducts entry in recipeproductlist) {
+                    _context.Remove(entry);
+                }
+            }
+             catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
             await _context.SaveChangesAsync();
             return NoContent();
         }

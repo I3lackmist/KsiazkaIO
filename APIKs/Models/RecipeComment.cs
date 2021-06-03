@@ -8,10 +8,16 @@ namespace APIKs.Models {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RecipeCommentID {get; set;}
+
         [Required]
         public string Body {get; set;}
+
         [Required]
         public DateTime Date {get; set;}
-        public int Likes {get; set;}
+
+        [Required]
+        public string Author {get; set;}
+
+        public int Likes {get; set;} = 0;
     }
 }
