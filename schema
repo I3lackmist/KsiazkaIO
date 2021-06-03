@@ -12,12 +12,12 @@ Likes INTEGER NOT NULL
 
 CREATE TABLE Products (
 ProductID INTEGER PRIMARY KEY AUTOINCREMENT, 
+Name TEXT,
 Carbohydrates REAL NOT NULL, 
 Proteins REAL NOT NULL, 
 Fats REAL NOT NULL, 
 Kcal REAL NOT NULL, 
-Note TEXT,
-Name TEXT
+Note TEXT
 );
 
 CREATE TABLE Users(
@@ -73,12 +73,6 @@ RecipeID REAL NOT NULL,
 ProductID REAL NOT NULL,
 AMOUNT REAL NOT NULL,
 PRIMARY KEY(RecipeID,ProductID)
-);
-
-CREATE TABLE ArticleAuthor(
-ArticleID INTEGER NOT NULL,
-Login TEXT NOT NULL,
-PRIMARY KEY(ArticleID, Login)
 );
 
 CREATE TABLE RecipesComments(
