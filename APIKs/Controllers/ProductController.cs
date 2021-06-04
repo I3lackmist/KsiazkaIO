@@ -7,14 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APIKs.Data;
 using APIKs.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace APIKs.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase {
+    public class ProductController : ControllerBase {
         private readonly AppDBContext _context;
 
-        public ProductsController(AppDBContext context) {
+        public ProductController(AppDBContext context) {
             _context = context;
         }
 
@@ -64,7 +67,17 @@ namespace APIKs.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product) {
+        public async Task<ActionResult<Product>> PostProduct([FromBody] JsonElement data) {
+            string jsonstr = System.Text.Json.JsonSerializer.Serialize(data);
+            dynamic json = JsonConvert.DeserializeObject(jsonstr);
+            Product product = new Product { 
+                Name = json["Name"], 
+                Carbohydrates = json["Carbohydrates"],
+                Proteins = json["Proteins"],
+                Fats = json["Fats"],
+                Kcal = json["Kcal"],
+                Note = json["Note"] 
+            };
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);

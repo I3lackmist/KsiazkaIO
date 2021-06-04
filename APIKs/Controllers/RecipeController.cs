@@ -14,10 +14,10 @@ using System.Text.Json;
 namespace APIKs.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecipesController : ControllerBase {
+    public class RecipeController : ControllerBase {
         private readonly AppDBContext _context;
 
-        public RecipesController(AppDBContext context) {
+        public RecipeController(AppDBContext context) {
             _context = context;
         }
 
@@ -83,7 +83,11 @@ namespace APIKs.Controllers {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
             
-            string category = json["Category"];
+            string category = json["Category"]["Name"];
+            if (!_context.Categories.Any(cat => cat.CategoryName ==  category)) {
+                _context.Categories.Add(new Category{CategoryName = category});
+            }
+
             _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
 
             await _context.SaveChangesAsync();

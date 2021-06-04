@@ -17,13 +17,17 @@ namespace APIKs.Controllers {
         public CategoryController(AppDBContext context) {
             _context = context;
         }
-        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories () {
+            return await _context.Categories.ToListAsync();
+        }
+
         [HttpGet("{category}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByCategory(string category) {
             var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.CategoryName.Equals(category)).ToListAsync();
             List<Recipe> recipes = new List<Recipe>();
             foreach (RecipesCategories entry in inCategory) {
-                recipes.Append(_context.Recipes.Find(entry.RecipeID));
+                recipes.Add(_context.Recipes.Find(entry.RecipeID));
             }
             return recipes;
         }

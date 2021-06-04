@@ -12,14 +12,9 @@ Recipe
 {
     "Name":"",
     "Description":"",
-    "Category":"",
+    "Category": {"Name":""}
     "UserName":"",
     "ProductIDs":[]
-}
-
-Category
-{
-    "Name":""
 }
 
 User

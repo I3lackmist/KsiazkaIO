@@ -8,15 +8,24 @@ Produkty w przepisie /
 Usuniecie przepisu /
 Komentarze pod przepisami /
 
-Ulubione przepisy
+Ulubione przepisy 
 
-Artykuly i ich autorzy
+Artykuly wszystkie
+Artykul z ID
 Artykuly od autora
+Wyslanie artykulu
 Komentarze pod artykulami
+Usuniecie artykulu
 
 Zbanowanie uzytkownika
 Stworzenie uzytkownika /
+Zarzadzanie dieta
 
 Dodanie moderatora
 
-Dodanie produktu z .jsona
+Dodanie produktu z .jsona /
+
+
+Tabela recipetickets
+
+Autoryzacja?
