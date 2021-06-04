@@ -8,7 +8,19 @@ Produkty w przepisie /
 Usuniecie przepisu /
 Komentarze pod przepisami /
 
-Ulubione przepisy 
+Dodanie produktu (z .jsona) /
+
+Ulubione przepisy dodanie /
+Ulubione przepisy uzytkownika /
+Ulubione przepisy usuniecie 
+
+Stworzenie uzytkownika /
+Zbanowanie uzytkownika /
+
+Dodanie moderatora
+
+Zarzadzanie dieta 
+
 
 Artykuly wszystkie
 Artykul z ID
@@ -17,14 +29,7 @@ Wyslanie artykulu
 Komentarze pod artykulami
 Usuniecie artykulu
 
-Zbanowanie uzytkownika
-Stworzenie uzytkownika /
-Zarzadzanie dieta
-
-Dodanie moderatora
-
-Dodanie produktu z .jsona /
-
+Login?
 
 Tabela recipetickets
 
