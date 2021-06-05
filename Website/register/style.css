@@ -1,0 +1,382 @@
+@font-face {
+  font-family: "kayak";
+  src: url("/../fonts/Kayak/Kayak-Sans-Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "kayak";
+  src: url("/../fonts/Kayak/Kayak-Sans-Bold.woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "kayak";
+  src: url("/../fonts/Kayak/Kayak-Sans-Light.woff");
+  font-weight: lighter;
+  font-style: normal;
+}
+
+html {
+  font-size: 100%;
+  font-family: "kayak";
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.sidebar {
+  padding: 0;
+  margin: 0;
+  z-index: 1111;
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  background-color: white;
+  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  transition: 0.15s;
+  color: black;
+  box-shadow: 10px 0px 10px rgb(54, 54, 54);
+}
+
+.sidebar > * {
+  padding: 0;
+  margin: 0;
+}
+
+.close_sidebar {
+  margin-left: 80%;
+  margin-top: 5%;
+  padding: 0;
+}
+
+.logo_sidebar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15%;
+  width: 40%;
+}
+
+.sidebar ul,
+a {
+  list-style: none;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+
+.sidebar > p {
+  text-align: center;
+}
+
+.sidebar_list {
+  font-size: 45px;
+  font-weight: normal;
+  color: black;
+  margin-bottom: 20%;
+}
+
+.sidebar_menu_text:hover {
+  text-decoration: underline;
+}
+
+.sidebar_divider {
+  margin-bottom: 10px;
+}
+
+.login_sidebar li {
+  display: inline-block;
+}
+
+.sidebar_media_icons {
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.sidebar_media_icons li {
+  display: inline-block;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
+div.header {
+  height: 100px;
+  box-shadow: 5px -3px 20px rgb(109, 109, 109);
+  z-index: 1111;
+  position: relative;
+}
+
+.logo {
+  float: left;
+  margin-left: 300px;
+}
+
+.hamburger:hover {
+  box-shadow: 5px -3px 20px rgb(54, 54, 54);
+}
+
+.login_btns {
+  list-style: none;
+  margin-right: 2%;
+  padding: 0;
+}
+
+.login_btns li {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  padding: 0px 0px 841px;
+  background-image: url("../images/BG_login.png");
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+
+.register_box {
+  background-color: white;
+  width: 600px;
+  height: 700px;
+  position: absolute;
+  top: 150px;
+  left: 660px;
+  box-shadow: 0px 10px 30px rgb(54, 54, 54);
+}
+
+.register_title {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  margin-top: 20px;
+}
+
+.username_caption {
+  margin-top: 10px;
+  margin-left: 80px;
+}
+
+.username_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+  height: 40px;
+  font-size: 27px;
+  font-family: kayak;
+  border: 1px solid rgb(92, 92, 92);
+  background-color: #f9f9f9;
+  padding-left: 20px;
+}
+
+.email_caption {
+  margin-top: 10px;
+  margin-left: 80px;
+}
+
+.email_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+  height: 40px;
+  font-size: 27px;
+  font-family: kayak;
+  border: 1px solid rgb(92, 92, 92);
+  background-color: #f9f9f9;
+  padding-left: 20px;
+}
+
+.login_caption {
+  margin-top: 10px;
+  margin-left: 80px;
+}
+
+.login_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+  height: 40px;
+  font-size: 27px;
+  font-family: kayak;
+  border: 1px solid rgb(92, 92, 92);
+  background-color: #f9f9f9;
+  padding-left: 20px;
+}
+
+::placeholder {
+  color: #b9b9b9;
+}
+
+:focus::placeholder {
+  color: transparent;
+}
+
+.password_caption {
+  margin-top: 10px;
+  margin-left: 80px;
+}
+
+.password_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+  height: 40px;
+  font-size: 27px;
+  font-family: kayak;
+  border: 1px solid rgb(92, 92, 92);
+  background-color: #f9f9f9;
+  padding-left: 20px;
+}
+
+.register_box ul {
+  margin: 0;
+  margin-left: 35px;
+  margin-top: 10px;
+  /* margin-right: 23px; */
+}
+
+.register_box ul > li {
+  display: inline-block;
+  list-style-type: none;
+  font-size: 19px;
+  /* margin-right: 20px; */
+}
+
+#remember {
+  width: 15px;
+  height: 15px;
+  border: solid white;
+}
+
+.dont_remember {
+  float: right;
+  margin-right: 30px;
+}
+
+.register_box a {
+  color: rgb(50, 135, 204);
+}
+
+.register_box a:hover {
+  text-decoration: underline;
+}
+.register_btn {
+  width: 200px;
+  height: 59px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  background-color: #4e6a78;
+  border: none;
+  font-family: kayak;
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
+}
+
+.register_btn:hover {
+  background-color: #6e90a1;
+  box-shadow: 0px 0px 10px rgb(138, 138, 138);
+}
+
+.register_btn:active {
+  background-color: #2d5a70;
+  box-shadow: 0px 0px 10px rgb(102, 102, 102);
+}
+
+.register_box p {
+  text-align: center;
+  margin: 5px 0 0 0;
+  font-size: 19px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("./../images/footer_bg.png");
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+
+.logo_footer {
+  margin-top: 20px;
+  margin-left: 200px;
+}
+
+.media_footer {
+  margin-top: 40px;
+}
+
+.media_icons {
+  list-style: none;
+  padding: 0;
+  margin-top: 10;
+}
+
+.media_icons li {
+  display: inline-block;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.our_media_text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.menu_footer {
+  margin-top: 50px;
+  margin-right: 200px;
+  list-style: none;
+  color: white;
+}
+
+.menu_footer li {
+  padding: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 29px;
+}
+
+.menu_text_footer:hover {
+  text-decoration: underline;
+}
+
+footer > * {
+  padding: 0px;
+}
+
+footer a {
+  color: white;
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stwórz Artykuł</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="header flex">
+      <a href="#" class="hamburger" onclick="openSidebar()"
+        ><img src="./../images/menu_icon.png"
+      /></a>
+
+      <a href="index.html" class="logo"
+        ><img src="./../images/logo_main.png"
+      /></a>
+
+      <ul class="login_btns">
+        <li>
+          <a href="#">
+            <img
+              class="login"
+              src="./../images/login_btn.png"
+              onmouseover="this.src='./../images/login_btn_hover.png';"
+              onmouseout="this.src='./../images/login_btn.png';"
+              onmousedown="this.src='./../images/login_btn_click.png';"
+              onmouseup="this.src='./../images/login_btn_hover.png';"
+            />
+          </a>
+        </li>
+        <li>
+          <img src="./../images/login_divideer.png" alt="" />
+        </li>
+        <li>
+          <a href="#"
+            ><img
+              class="sign_up"
+              src="./../images/register_btn.png"
+              onmouseover="this.src='./../images/register_btn_hover.png';"
+              onmouseout="this.src='./../images/register_btn.png';"
+              onmousedown="this.src='./../images/register_btn_click.png';"
+              onmouseup="this.src='./../images/register_btn_hover.png';"
+          /></a>
+        </li>
+      </ul>
+    </div>
+
+    <div id="side_menu" class="sidebar">
+      <div class="close_sidebar">
+        <a href="#" onclick="closeSidebar()"
+          ><img src="./../images/x_btn.png" alt=""
+        /></a>
+      </div>
+      <div class="logo_sidebar">
+        <img src="./../images/logo_sidebar.png" />
+      </div>
+
+      <ul class="sidebar_list">
+        <li class="sidebar_menu_text"><a href="">Przepisy</a></li>
+        <li>
+          <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
+        </li>
+        <li class="sidebar_menu_text"><a href="">Artykuły</a></li>
+        <li>
+          <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
+        </li>
+        <li class="sidebar_menu_text"><a href="">Dietetyk</a></li>
+        <li>
+          <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
+        </li>
+        <li class="sidebar_menu_text"><a href="">Produkty</a></li>
+        <li>
+          <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
+        </li>
+        <li class="sidebar_menu_text"><a href="">Moje produkty</a></li>
+      </ul>
+
+      <ul class="sidebar_media_icons">
+        <li>
+          <a href=""> <img src="./../images/facebook_sidebar.png" alt="" /></a>
+        </li>
+
+        <li>
+          <a href=""> <img src="./../images/twitter_sidebar.png" alt="" /></a>
+        </li>
+        <li>
+          <a href=""> <img src="./../images/pinterest_sidebar.png" alt="" /></a>
+        </li>
+      </ul>
+    </div>
+
+    <main>
+      <div class="article_box">
+        <div class="article_title">
+          <img src="../images/create_article_title.png" alt="" />
+        </div>
+        <div>
+          <img src="../images/article_box_divider.png" alt="" />
+        </div>
+
+        <form action="" id="article_form">
+          <div class="name_caption">
+            <img src="../images/name_caption.png" alt="" />
+          </div>
+          <input
+            class="name_text"
+            type="text"
+            placeholder="Nazwa artykułu..."
+          />
+          <div class="description_caption">
+            <img src="../images/description_caption.png" alt="" />
+          </div>
+          <textarea
+            name="article_description"
+            class="description_text"
+            cols="20"
+            rows="1"
+            maxlength="250"
+            form="article_form"
+            placeholder="Napisz swój artykuł"
+          ></textarea>
+          <!-- <input
+            class="description_text"
+            type="textarea"
+            placeholder="Napisz swój artykuł"
+            maxlength="250"
+            rows="4"
+            cols="50"
+          /> -->
+          <ul class="article_btns">
+            <li>
+              <input
+                class="cancel_btn"
+                type="submit"
+                value="Anuluj"
+                name="cancel"
+              />
+            </li>
+            <li>
+              <input
+                class="submit_btn"
+                type="submit"
+                value="Zaloguj"
+                name="submit"
+              />
+            </li>
+          </ul>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <div class="logo_footer"><img src="./../images/logo_footer.png" /></div>
+      <div class="media_footer">
+        <div class="our_media_text"><img src="./../images/media.png" /></div>
+        <ul class="media_icons">
+          <li>
+            <a href=""><img src="./../images/fb_logo_white.png" alt="" /></a>
+          </li>
+          <li>
+            <a href=""
+              ><img src="./../images/twitter_logo_white.png" alt=""
+            /></a>
+          </li>
+          <li>
+            <a href=""
+              ><img src="./../images/pinterest_logo_white.png" alt=""
+            /></a>
+          </li>
+        </ul>
+      </div>
+      <ul class="menu_footer">
+        <li class="menu_text_footer"><a href="">Zasady użytkowania</a></li>
+        <li class="menu_text_footer"><a href="">Pomoc</a></li>
+        <li class="menu_text_footer"><a href="">O nas</a></li>
+        <li class="menu_text_footer"><a href="">Polityka prywatności</a></li>
+        <li class="menu_text_footer"><a href=""> Kontakt</a></li>
+      </ul>
+    </footer>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
