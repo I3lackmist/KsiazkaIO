@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,6 +83,27 @@ namespace APIKs.Controllers {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+        }
+
+        [HttpPut("add")]
+        public async Task<IActionResult> AddPrivateProduct([FromBody] PrivateProduct product, [FromHeader] string userName) {
+            string userLogin = _context.Users.Where( u => u.Name == userName).First().Login;
+            
+            string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
+
+            string productpath = string.Concat(dbdir,"/",userLogin,"/userproducts.json");
+
+            string productData = await System.IO.File.ReadAllTextAsync(productpath);
+            
+            var plist = JsonConvert.DeserializeObject<List<PrivateProduct>>(productData);
+            product.ProductID = -(plist.Count + 1);
+
+            plist.Add(product);
+
+            string newjson = JsonConvert.SerializeObject(plist, Formatting.Indented);
+            await System.IO.File.WriteAllTextAsync(productpath, newjson);
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]

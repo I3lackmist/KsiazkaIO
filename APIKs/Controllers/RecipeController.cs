@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,6 +103,32 @@ namespace APIKs.Controllers {
             return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, username = userName }, recipe);
         }
 
+        
+
+        [HttpPost("ticket")]
+        public async Task<IActionResult> PostRecipeTicket([FromBody] PrivateRecipe data, [FromHeader] string userName) {
+            string userLogin = _context.Users.Where( u => u.Name == userName).First().Login;
+            
+            string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
+
+            string recipepath = string.Concat(dbdir,"/",userLogin,"/userrecipes.json");
+
+            string recipeData = await System.IO.File.ReadAllTextAsync(recipepath);
+
+            var rlist = JsonConvert.DeserializeObject<List<PrivateRecipe>>(recipeData);
+            
+            data.RecipeID = -(rlist.Count+1);   
+
+            rlist.Add(data);
+            
+            string newjson = JsonConvert.SerializeObject(rlist, Formatting.Indented);
+            await System.IO.File.WriteAllTextAsync(recipepath, newjson);  
+
+            _context.RecipeTickets.Add(new RecipeTicket{ RecipeLocalID = data.RecipeID, CreatorLogin = userLogin, DatePosted = DateTime.Now });
+            await _context.SaveChangesAsync();
+            
+            return Ok();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRecipe([FromHeader] string userName, int id) {

@@ -9,7 +9,7 @@ namespace APIKs.Models {
         public int RecipeLocalID {get; set;}
 
         [Required]
-        public int CreatorLogin {get; set;}
+        public string CreatorLogin {get; set;}
 
         [Required]
         public DateTime DatePosted {get; set;}

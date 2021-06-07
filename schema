@@ -89,7 +89,7 @@ PRIMARY KEY(ArticleID, ArticleCommentID)
 
 CREATE TABLE RecipeTickets(
 RecipeLocalID INTEGER NOT NULL,
-CreatorLogin INTEGER NOT NULL,
+CreatorLogin TEXT NOT NULL,
 DatePosted REAL NOT NULL,
 PRIMARY KEY(RecipeLocalID,CreatorLogin)
 );
