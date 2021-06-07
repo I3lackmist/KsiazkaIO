@@ -86,3 +86,10 @@ ArticleID INTEGER NOT NULL,
 ArticleCommentID INTEGER NOT NULL,
 PRIMARY KEY(ArticleID, ArticleCommentID)
 );
+
+CREATE TABLE RecipeTickets(
+RecipeLocalID INTEGER NOT NULL,
+CreatorLogin INTEGER NOT NULL,
+DatePosted REAL NOT NULL,
+PRIMARY KEY(RecipeLocalID,CreatorLogin)
+);

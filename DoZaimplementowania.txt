@@ -8,6 +8,13 @@ Produkty w przepisie /
 Usuniecie przepisu /
 Komentarze pod przepisami /
 
+Artykuly wszystkie / 
+Artykul z ID / 
+Artykuly od autora / 
+Wyslanie artykulu / 
+Komentarze pod artykulami / 
+Usuniecie artykulu /
+
 Dodanie produktu (z .jsona) /
 
 Ulubione przepisy dodanie /
@@ -21,16 +28,9 @@ Dodanie moderatora /
 
 Zarzadzanie dieta /
 
+Produkty i przepisy w jsonach na indeksach ujemnych by kontrolery mogly poznac
 
-Artykuly wszystkie / 
-Artykul z ID / 
-Artykuly od autora / 
-Wyslanie artykulu / 
-Komentarze pod artykulami / 
-Usuniecie artykulu /
+Tabela recipetickets - przepisy wymagajace zatwierdzenia
 
 Login?
-
-Tabela recipetickets
-
-Autoryzacja?
+Autentykacja,autoryzacja?

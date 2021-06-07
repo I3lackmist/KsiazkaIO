@@ -11,6 +11,7 @@ using System.Text.Json;
 
 using APIKs.Data;
 using APIKs.Models;
+using APIKs.JSONModels;
 
 namespace APIKs.Controllers {
     [Route("api/[controller]")]
@@ -78,28 +79,24 @@ namespace APIKs.Controllers {
             return comments;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] JsonElement data, [FromHeader] string userName) {
-            string jsonstr = System.Text.Json.JsonSerializer.Serialize(data);
-            dynamic json = JsonConvert.DeserializeObject(jsonstr);
-            Recipe recipe = new Recipe { Name = json["Name"], Description = json["Description"], Author = userName };
+        [HttpPost] // For moderators for instant access
+        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] PrivateRecipe data, [FromHeader] string userName) {
+            Recipe recipe = new Recipe { Name = data.Name, Description = data.Description, Author = userName };
             _context.Recipes.Add(recipe);
             
-            await _context.SaveChangesAsync();
-            
-            Newtonsoft.Json.Linq.JArray productids = json["ProductIDs"];
-            List<int> idarray = productids.ToObject<List<int>>();
+            int[] productids = data.ProductIDs;
 
-            foreach(int productid in idarray) {
+            foreach(int productid in productids) {
                 _context.RecipesProducts.Add(new RecipesProducts {RecipeID = recipe.RecipeID, ProductID = productid});
             }
             
-            string category = json["Category"]["Name"];
-            if (!_context.Categories.Any(cat => cat.CategoryName ==  category)) {
-                _context.Categories.Add(new Category{CategoryName = category});
+            string[] categories = data.Categories;
+            foreach(string category in categories){
+                if (!_context.Categories.Any(cat => cat.CategoryName ==  category)) {
+                    _context.Categories.Add(new Category{CategoryName = category});
+                }
+                _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
             }
-
-            _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
 
             await _context.SaveChangesAsync();
             return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, username = userName }, recipe);
@@ -112,12 +109,19 @@ namespace APIKs.Controllers {
             if(recipe == null) {
                 return NotFound();
             }
-            //Mod check
+
+            string userLogin = _context.Users.Where( u => u.Name == userName).First().Login;
+            bool isOwnerOrModerator = (_context.Recipes.Find(id).Author == userName) || (_context.Moderators.Any( mod => mod.Login == userLogin));
+            
+            if(!isOwnerOrModerator) return Forbid();
+
             _context.Recipes.Remove(recipe);
 
             try {
-                RecipesCategories recipescategoriesentry = _context.RecipesCategories.Where(recipe => recipe.RecipeID.Equals(id)).First();
-                _context.RecipesCategories.Remove(recipescategoriesentry);
+                IEnumerable<RecipesCategories> recipescategoriesentries = await _context.RecipesCategories.Where(recipe => recipe.RecipeID.Equals(id)).ToListAsync();
+                foreach(var entry in recipescategoriesentries) {
+                    _context.RecipesCategories.Remove(entry);
+                }
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
@@ -134,7 +138,7 @@ namespace APIKs.Controllers {
             }
 
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
     }
 }

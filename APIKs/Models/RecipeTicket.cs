@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace APIKs.Models {
-    [Table("RecipesProducts")]
-    public class RecipesProducts {
+    [Table("RecipeTickets")]
+    public class RecipeTicket {
         [Required]
-        public int RecipeID {get; set;}
+        public int RecipeLocalID {get; set;}
 
         [Required]
-        public int ProductID {get; set;}
-        
+        public int CreatorLogin {get; set;}
+
         [Required]
-        public float Amount {get; set;}
+        public DateTime DatePosted {get; set;}
     }
 }

@@ -1,5 +1,5 @@
 Product
-{
+{ 
     "Name":"",
     "Carbohydrates":,
     "Proteins":,
@@ -8,13 +8,25 @@ Product
     "Note":""
 }
 
-Recipe
+PrivateProduct
+{
+    "ProductID":"",
+    "Name":"",
+    "Carbohydrates":,
+    "Proteins":,
+    "Fats":,
+    "Kcal":,
+    "Note":""
+}
+
+Recipe / PrivateRecipe
 {
     "Name":"",
     "Description":"",
-    "Category": {"Name":""}
+    "Categories": {"CategoryName":""}
     "UserName":"",
-    "ProductIDs":[]
+    "ProductIDs":[],
+    "Amounts":[]
 }
 
 User

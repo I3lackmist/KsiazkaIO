@@ -22,11 +22,13 @@ namespace APIKs.Data {
         public DbSet<RecipesComments> RecipesComments {get; set;}
         public DbSet<User> Users {get; set;}
 
+        public DbSet<RecipeTicket> RecipeTickets {get; set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<ArticlesComments>().HasKey( acu => new {acu.ArticleCommentID, acu.ArticleID});
             modelBuilder.Entity<RecipesComments>().HasKey( rcu => new {rcu.RecipeID, rcu.RecipeCommentID});
             modelBuilder.Entity<RecipesCategories>().HasKey( rc => new {rc.RecipeID, rc.CategoryName});
             modelBuilder.Entity<RecipesProducts>().HasKey( rp => new { rp.RecipeID, rp.ProductID});
+            modelBuilder.Entity<RecipeTicket>().HasKey( rt => new { rt.RecipeLocalID, rt.CreatorLogin });
         }
         public AppDBContext(DbContextOptions<AppDBContext> options):base(options) {}
     }
