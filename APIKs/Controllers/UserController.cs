@@ -116,7 +116,15 @@ namespace APIKs.Controllers {
             
             return Ok();
         }
-
+        
+        [HttpPut("mod/{userLogin}")]
+        public async Task<IActionResult> MakeMod(string userLogin) {
+            Moderator mod = new Moderator { Login = userLogin, DateSince = DateTime.Now};
+            await _context.Moderators.AddAsync(mod);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        
         private string GetUserLogin(string userName) {
             var user = _context.Users.Where( user => user.Name == userName).First();
             return user.Login;
