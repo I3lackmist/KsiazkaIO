@@ -1,20 +1,20 @@
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Regular.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Regular.woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Bold.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Bold.woff");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Light.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Light.woff");
   font-weight: lighter;
   font-style: normal;
 }
@@ -163,6 +163,36 @@ h1 {
   margin-top: 50px;
   /* margin-bottom: 10px; */
   width: 20%;
+  font-size: 50px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#flex_popular{
+  list-style: none;
+}
+
+#flex_popular > ul{
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+list-style: none;
+/* width: 1520; */
+}
+
+#flex_popular p{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 80px;
+width: 400px;
+text-align: center;
+}
+
+#flex_popular a:hover{
+background-color: black;
 }
 
 .divider {

@@ -11,29 +11,40 @@
 
   <body>
     <div class="header flex">
-      <a href="#" class="hamburger" onclick="openSidebar()"><img src="/../images/menu_icon.png" /></a>
+      <a href="#" class="hamburger" onclick="openSidebar()"
+        ><img src="./../images/menu_icon.png"
+      /></a>
 
-      <a href="index.html" class="logo"><img src="./../images/logo_main.png" /></a>
+      <a href="./../main/index.html" class="logo"
+        ><img src="./../images/logo_main.png"
+      /></a>
 
       <ul class="login_btns">
         <li>
-          <a href="#">
-            <img class="login" src="./../images/login_btn.png" 
-             onmouseover="this.src='./../images/login_btn_hover.png';"
-             onmouseout="this.src='./../images/login_btn.png';"
-             onmousedown="this.src='./../images/login_btn_click.png';"
-             onmouseup="this.src='./../images/login_btn_hover.png';"/>
+          <a href="./../login/index.html">
+            <img
+              class="login"
+              src="./../images/login_btn.png"
+              onmouseover="this.src='./../images/login_btn_hover.png';"
+              onmouseout="this.src='./../images/login_btn.png';"
+              onmousedown="this.src='./../images/login_btn_click.png';"
+              onmouseup="this.src='./../images/login_btn_hover.png';"
+            />
           </a>
         </li>
         <li>
           <img src="./../images/login_divideer.png" alt="" />
         </li>
         <li>
-          <a href="#"><img class="sign_up" src="./../images/register_btn.png"
-            onmouseover="this.src='./../images/register_btn_hover.png';"
-            onmouseout="this.src='./../images/register_btn.png';"
-            onmousedown="this.src='./../images/register_btn_click.png';"
-            onmouseup="this.src='./../images/register_btn_hover.png';" /></a>
+          <a href="./../register/index.html"
+            ><img
+              class="sign_up"
+              src="./../images/register_btn.png"
+              onmouseover="this.src='./../images/register_btn_hover.png';"
+              onmouseout="this.src='./../images/register_btn.png';"
+              onmousedown="this.src='./../images/register_btn_click.png';"
+              onmouseup="this.src='./../images/register_btn_hover.png';"
+          /></a>
         </li>
       </ul>
     </div>
@@ -49,11 +60,15 @@
       </div>
 
       <ul class="sidebar_list">
-        <li class="sidebar_menu_text"><a href="">Przepisy</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../recipes/index.html">Przepisy</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Artykuły</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../articles/index.html">Artykuły</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
@@ -61,14 +76,16 @@
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Produkty</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../products/index.html">Produkty</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Moje produkty</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../products/index.html">Moje produkty</a>
+        </li>
       </ul>
-
-
 
       <ul class="sidebar_media_icons">
         <li>
@@ -86,17 +103,33 @@
 
     <main>
       <div class="search_box">
-        <a class="search_btn" href="#"><img src="./../images/search_btn.png" alt=""></a>
-        <input class="search_txt" type="text" placeholder="Przepis...">
+        <a class="search_btn" href="#"
+          ><img src="./../images/search_btn.png" alt=""
+        /></a>
+        <input class="search_txt" type="text" placeholder="Przepis..." />
       </div>
 
+      <div class="create_recipe_btn">
+        <a href="../create_recipe/index.html"
+          ><img
+            src="./../images/create_recipe_btn.png"
+            onmouseover="this.src='./../images/create_recipe_btn_hover.png';"
+            onmouseout="this.src='./../images/create_recipe_btn.png';"
+            onmousedown="this.src='./../images/create_recipe_btn_click.png';"
+            onmouseup="this.src='./../images/create_recipe_btn_hover.png';"
+          />
+        </a>
+      </div>
 
-      <div class="create_btn">
-        <a href="#" ><img src="./../images/create_recipe_btn.png"
-          onmouseover="this.src='./../images/create_recipe_btn_hover.png';"
-          onmouseout="this.src='./../images/create_recipe_btn.png';"
-          onmousedown="this.src='./../images/create_recipe_btn_click.png';"
-          onmouseup="this.src='./../images/create_recipe_btn_hover.png';" />
+      <div class="create_article_btn">
+        <a href="./../create_article/index.html"
+          ><img
+            src="./../images/create_article_btn.png"
+            onmouseover="this.src='./../images/create_article_btn_hover.png';"
+            onmouseout="this.src='./../images/create_article_btn.png';"
+            onmousedown="this.src='./../images/create_article_btn_click.png';"
+            onmouseup="this.src='./../images/create_article_btn_hover.png';"
+          />
         </a>
       </div>
     </main>
@@ -105,20 +138,64 @@
       <ul class="catg">
         <li><span class="catg_trend_topic">Kategorie na trendzie:</span></li>
         <li class="catg_text"><a href="#">Fit</a></li>
-        <li class="divider_catg"><img src="./../images/divider1_category.png" /></li>
+        <li class="divider_catg">
+          <img src="./../images/divider1_category.png" />
+        </li>
         <li class="catg_text"><a href="#">Azia</a></li>
-        <li class="divider_catg"><img src="./../images/divider1_category.png" /></li>
+        <li class="divider_catg">
+          <img src="./../images/divider1_category.png" />
+        </li>
         <li class="catg_text"><a href="#">Wege</a></li>
-        <li class="divider_catg"><img src="./../images/divider1_category.png" /></li>
+        <li class="divider_catg">
+          <img src="./../images/divider1_category.png" />
+        </li>
         <li class="catg_text"><a href="#">Organic</a></li>
       </ul>
     </div>
 
-    <section class="recipes">
+    <!-- <section class="recipes">
       <div class="top_section_divider">
         <img src="./../images/divider_main.png" />
       </div>
       <h2>Popularne przepisy</h2>
+      <div class="bottom_section_divider">
+        <img src="./../images/divider_main.png" />
+      </div>
+    </section> -->
+
+    <section id="flex_popular">
+      <div class="top_section_divider">
+        <img src="./../images/divider_main.png" />
+      </div>
+      <h2>Popularne przepisy</h2>
+      <ul>
+        <li>
+          <a href=""><img src="./../images/pic1.png" /></a>
+          <p>Zupa Dyniowa</p>
+        </li>
+        <li>
+          <a href=""><img src="./../images/pic2.png" /></a>
+          <p>Dip z baklazana "Baba ghanoush"</p>
+        </li>
+        <li>
+          <a href=""><img src="./../images/pic3.png" /></a>
+          <p>Zapiekanka z mozarella i pomidorem</p>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href=""><img src="./../images/pic4.png" /></a>
+          <p>Weganskie placki z warzywami</p>
+        </li>
+        <li>
+          <a href=""><img src="./../images/pic5.png" /></a>
+          <p>Szaszlyki drobiowe z sosem limonkowym</p>
+        </li>
+        <li>
+          <a href=""><img src="./../images/pic6.png" /></a>
+          <p>Taco z ostrym sosem chilli</p>
+        </li>
+      </ul>
       <div class="bottom_section_divider">
         <img src="./../images/divider_main.png" />
       </div>
@@ -133,10 +210,14 @@
             <a href=""><img src="./../images/fb_logo_white.png" alt="" /></a>
           </li>
           <li>
-            <a href=""><img src="./../images/twitter_logo_white.png" alt="" /></a>
+            <a href=""
+              ><img src="./../images/twitter_logo_white.png" alt=""
+            /></a>
           </li>
           <li>
-            <a href=""><img src="./../images/pinterest_logo_white.png" alt="" /></a>
+            <a href=""
+              ><img src="./../images/pinterest_logo_white.png" alt=""
+            /></a>
           </li>
         </ul>
       </div>
@@ -149,7 +230,6 @@
       </ul>
     </footer>
 
-
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

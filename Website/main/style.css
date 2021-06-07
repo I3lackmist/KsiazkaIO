@@ -1,20 +1,20 @@
 @font-face {
   font-family: "kayak";
-  src: url(/../fonts/Kayak/Kayak-Sans-Regular.woff);
+  src: url(./../fonts/Kayak/Kayak-Sans-Regular.woff);
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url(/../fonts/Kayak/Kayak-Sans-Bold.woff);
+  src: url(./../fonts/Kayak/Kayak-Sans-Bold.woff);
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url(/../fonts/Kayak/Kayak-Sans-Light.woff);
+  src: url(./../fonts/Kayak/Kayak-Sans-Light.woff);
   font-weight: lighter;
   font-style: normal;
 }
@@ -185,6 +185,11 @@ main {
   box-shadow: 5px 0px 5px rgb(151, 151, 151);
 }
 
+.search_btn:active{
+  box-shadow: 5px 0px 5px rgb(122, 122, 122);
+  background-color: #eefffd;
+}
+
 .search_txt{
   border: none;
   background: none;
@@ -200,17 +205,26 @@ main {
   
 }
 
-.search_txt::placeholder{
-  opacity: 0.3;
-  font-weight: 100;
+:focus::placeholder {
+  color: transparent;
 }
 
-.create_btn {
+.search_txt::placeholder{
+  opacity: 0.3;
+  font-weight: 10;
+}
+
+.create_recipe_btn {
   position: absolute;
   left: 662px;
   top: 646px;
 }
 
+.create_article_btn {
+  position: absolute;
+  left: 662px;
+  top: 760px;
+}
 
 div.trend {
   list-style: none;
@@ -257,16 +271,47 @@ div.trend {
 
 h2 {
   text-decoration: underline;
+  margin-bottom: 50px;
 }
 
 .bottom_section_divider {
-  margin-top: 170px;
+  margin-top: 60px;
   margin-bottom: 70px;
 }
 
 .recipes {
   margin-left: 200px;
   margin-right: 200px;
+}
+
+#flex_popular{
+  margin-left: 200px;
+  margin-right: 200px;
+  list-style: none;
+
+}
+
+#flex_popular > ul{
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+list-style: none;
+width: 1520;
+}
+
+#flex_popular p{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 80px;
+width: 400px;
+text-align: center;
+}
+
+#flex_popular a:hover{
+background-color: black;
 }
 
 footer {

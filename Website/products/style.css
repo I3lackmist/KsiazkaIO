@@ -1,20 +1,20 @@
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Regular.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Regular.woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Bold.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Bold.woff");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "kayak";
-  src: url("/../fonts/Kayak/Kayak-Sans-Light.woff");
+  src: url("./../fonts/Kayak/Kayak-Sans-Light.woff");
   font-weight: lighter;
   font-style: normal;
 }
@@ -157,12 +157,14 @@ main {
 }
 
 h1 {
-  display: block;
+  /* display: block; */
   /* margin-left: auto; */
   margin-right: auto;
   margin-top: 50px;
+  text-decoration: underline;
+  font-weight: bold;
   /* margin-bottom: 10px; */
-  width: 20%;
+  /* width: 20%; */
 }
 
 .divider {
@@ -173,7 +175,7 @@ h1 {
   display: flex;
   margin: 0;
   padding: 0;
-  margin-top: -30px;
+  margin-bottom: 60px;
 }
 
 #sort_bar li {
@@ -204,24 +206,33 @@ h1 {
   font-size: 36px;
   height: 60px;
 }
-/* .name_caption {
-  margin-top: 30px;
-  margin-left: 65px;
+
+#flex_products{
+  list-style: none;
 }
 
-.name_text {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 600px;
-  height: 60px;
-  font-size: 27px;
-  font-family: kayak;
-  border: 1px solid rgb(92, 92, 92);
-  background-color: #f9f9f9;
-  padding-left: 20px;
-} */
+#flex_products > ul{
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
 
+list-style: none;
+/* width: 1520; */
+}
+
+#flex_products p{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 80px;
+width: 269px;
+text-align: center;
+}
+
+#flex_products a:hover{
+background-color: black;
+}
 ::placeholder {
   color: #b9b9b9;
 }

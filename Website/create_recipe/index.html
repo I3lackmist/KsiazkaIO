@@ -7,7 +7,10 @@
     <title>Stwórz przepis</title>
 
     <link rel="stylesheet" href="./style.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -16,13 +19,13 @@
         ><img src="./../images/menu_icon.png"
       /></a>
 
-      <a href="index.html" class="logo"
+      <a href="./../main/index.html" class="logo"
         ><img src="./../images/logo_main.png"
       /></a>
 
       <ul class="login_btns">
         <li>
-          <a href="/../login/index.html">
+          <a href="./../login/index.html">
             <img
               class="login"
               src="./../images/login_btn.png"
@@ -37,7 +40,7 @@
           <img src="./../images/login_divideer.png" alt="" />
         </li>
         <li>
-          <a href="#"
+          <a href="./../register/index.html"
             ><img
               class="sign_up"
               src="./../images/register_btn.png"
@@ -61,11 +64,15 @@
       </div>
 
       <ul class="sidebar_list">
-        <li class="sidebar_menu_text"><a href="">Przepisy</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../recipes/index.html">Przepisy</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Artykuły</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../articles/index.html">Artykuly</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
@@ -73,11 +80,15 @@
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Produkty</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../products/index.html">Produkty</a>
+        </li>
         <li>
           <img class="sidebar_divider" src="./../images/sidebar_divider.png" />
         </li>
-        <li class="sidebar_menu_text"><a href="">Moje produkty</a></li>
+        <li class="sidebar_menu_text">
+          <a href="./../products/index.html">Moje produkty</a>
+        </li>
       </ul>
 
       <ul class="sidebar_media_icons">
@@ -144,9 +155,11 @@
                 </li>
               </ul>
             </div>
+
             <div id="middle">
-              <img src="../images/create_recipe_divider.png" alt="">
+              <img src="../images/create_recipe_divider.png" alt="" />
             </div>
+
             <div id="right">
               <div class="picture_caption">
                 <img src="../images/picture_caption.png" alt="" />
@@ -154,23 +167,45 @@
               <div id="input_picture">
                 <input type="file" accept="image/*" id="file" />
                 <label for="file">
-                  <i class="material-icons">
-                  add_photo_alternate
-                  </i>
-                  Wybierz zdjęcie</label>
+                  <i class="material-icons"> add_photo_alternate </i>
+                  Wybierz zdjecie</label
+                >
               </div>
               <div class="ingriedients_caption">
                 <img src="../images/ingriedients_caption.png" />
               </div>
 
               <div id="product_search_bar">
-              <button id="add_product_btn">
-                <i class="material-icons">
-                add
-                </i>
-              </button>
-              <input type="search" id="search_product_text">
+                <button id="add_product_btn">
+                  <i class="material-icons"> add </i>
+                </button>
+                <input
+                  type="search"
+                  id="search_product_text"
+                  onclick="showProductDetails()"
+                />
               </div>
+
+              <ul id="product_details">
+                <li>
+                  <a href="#" onclick="hideProductDetails()">
+                    <img src="./../images/x_btn.png" id="hide_product_details"
+                  /></a>
+                  cukry: <input type="number" class="detail_product_text" />
+                </li>
+                <li>
+                  tluszcze: <input type="number" class="detail_product_text" />
+                </li>
+                <li>
+                  biaka: <input type="number" class="detail_product_text" />
+                </li>
+                <li>
+                  kalorie: <input type="number" class="detail_product_text" />
+                </li>
+                <li>
+                  sol: <input type="number" class="detail_product_text" />
+                </li>
+              </ul>
             </div>
           </section>
         </form>
@@ -206,6 +241,6 @@
       </ul>
     </footer>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
