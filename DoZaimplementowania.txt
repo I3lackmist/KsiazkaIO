@@ -19,15 +19,15 @@ Zbanowanie uzytkownika /
 
 Dodanie moderatora /
 
-Zarzadzanie dieta 
+Zarzadzanie dieta /
 
 
-Artykuly wszystkie
-Artykul z ID
-Artykuly od autora
-Wyslanie artykulu
-Komentarze pod artykulami
-Usuniecie artykulu
+Artykuly wszystkie / 
+Artykul z ID / 
+Artykuly od autora / 
+Wyslanie artykulu / 
+Komentarze pod artykulami / 
+Usuniecie artykulu /
 
 Login?
 

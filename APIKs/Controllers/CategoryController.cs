@@ -22,16 +22,6 @@ namespace APIKs.Controllers {
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories () {
             return await _context.Categories.ToListAsync();
         }
-
-        [HttpGet("{category}")]
-        public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByCategory(string category) {
-            var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.CategoryName.Equals(category)).ToListAsync();
-            List<Recipe> recipes = new List<Recipe>();
-            foreach (RecipesCategories entry in inCategory) {
-                recipes.Add(_context.Recipes.Find(entry.RecipeID));
-            }
-            return recipes;
-        }
         
         [HttpPost]
         public async Task<ActionResult<Category>> CreateCategory([FromBody] Category category) {

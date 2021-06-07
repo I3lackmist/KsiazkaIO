@@ -25,3 +25,11 @@ User
     "Name":"",
     "DateRegistered":""
 }
+
+Meal
+{
+    "MealName":"",
+    "DateToConsume":"",
+    "ProductIDs":[],
+    "RecipeIDs":[]
+}

@@ -48,6 +48,16 @@ namespace APIKs.Controllers {
             return categories;
         }
 
+        [HttpGet("{category}")]
+        public async Task<ActionResult<IEnumerable<Recipe>>> RecipesGetByCategory(string category) {
+            var inCategory = await _context.RecipesCategories.Where( recipescategories => recipescategories.CategoryName.Equals(category)).ToListAsync();
+            List<Recipe> recipes = new List<Recipe>();
+            foreach (RecipesCategories entry in inCategory) {
+                recipes.Add(_context.Recipes.Find(entry.RecipeID));
+            }
+            return recipes;
+        }
+
         [HttpGet("{id}/products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProductsInRecipe(int id) {
             List<Product> products = new List<Product>();
@@ -92,7 +102,7 @@ namespace APIKs.Controllers {
             _context.RecipesCategories.Add(new RecipesCategories {RecipeID = recipe.RecipeID, CategoryName = category});
 
             await _context.SaveChangesAsync();
-            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, login = userName }, recipe);
+            return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, username = userName }, recipe);
         }
 
 

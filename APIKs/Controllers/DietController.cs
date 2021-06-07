@@ -56,7 +56,7 @@ namespace APIKs.Controllers {
             string dietData = await System.IO.File.ReadAllTextAsync(path);
             var list = JsonConvert.DeserializeObject<List<Meal>>(dietData);
             foreach (Meal meal in list) {
-                if( meal.dateToConsume < DateTime.Today ) {
+                if( meal.DateToConsume < DateTime.Today ) {
                     list.Remove(meal);
                 }
             }
@@ -65,15 +65,22 @@ namespace APIKs.Controllers {
             await System.IO.File.WriteAllTextAsync(path, newjson);
         }
 
-        [HttpPut("{mealname}/addproduct")] 
-        public async Task<IActionResult> AddProductToMeal([FromHeader] string userName, [FromBody] Product product, string mealname) {
+        [HttpPut("{mealname}/{days}/addproduct")] 
+        public async Task<IActionResult> AddProductToMeal([FromHeader] string userName, [FromBody] ProductID productid, string mealname, int days) {
+            if(days>7) return Forbid();
+            
             string ulogin = GetUserLogin(userName);
             string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
             string dietpath = string.Concat(dbdir,"/",ulogin,"/diet.json");
+            
+            DateTime targetdate = DateTime.Now.AddDays(days).Date;
 
             string dietData = await System.IO.File.ReadAllTextAsync(dietpath);
             var list = JsonConvert.DeserializeObject<List<Meal>>(dietData);
-            var newlist = list.Where( meal => meal.MealName == mealname).First().ProductIDs.Append(product.ProductID);
+
+            Meal targetmeal = list.Where( meal => meal.MealName == mealname && meal.DateToConsume.Date == targetdate).First();
+            
+            targetmeal.ProductIDs =  targetmeal.ProductIDs.Append(productid.id).ToArray(); 
             
             string newjson = JsonConvert.SerializeObject(list, Formatting.Indented);
             await System.IO.File.WriteAllTextAsync(dietpath, newjson);
@@ -81,23 +88,30 @@ namespace APIKs.Controllers {
             return Ok();
         }
 
-        [HttpPut("{mealname}/addrecipe")] 
-        public async Task<IActionResult> AddRecipeToMeal([FromHeader] string userName, [FromBody] Recipe recipe, string mealname) {
+        [HttpPut("{mealname}/{days}/addrecipe")] 
+        public async Task<IActionResult> AddRecipeToMeal([FromHeader] string userName, [FromBody] RecipeID recipeid, string mealname, int days) {
+            if(days>7) return Forbid();
+
             string ulogin = GetUserLogin(userName);
             string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
             string dietpath = string.Concat(dbdir,"/",ulogin,"/diet.json");
 
+            DateTime targetdate = DateTime.Now.AddDays(days).Date;
+
             string dietData = await System.IO.File.ReadAllTextAsync(dietpath);
             var list = JsonConvert.DeserializeObject<List<Meal>>(dietData);
-            var newlist = list.Where( meal => meal.MealName == mealname).First().RecipeIDs.Append(recipe.RecipeID);
             
+            Meal targetmeal = list.Where( meal => meal.MealName == mealname && meal.DateToConsume.Date == targetdate).First();
+
+            targetmeal.ProductIDs =  targetmeal.ProductIDs.Append(recipeid.id).ToArray(); 
+
             string newjson = JsonConvert.SerializeObject(list, Formatting.Indented);
             await System.IO.File.WriteAllTextAsync(dietpath, newjson);
 
             return Ok();
         }
 
-        [HttpGet("{mealname}/summary")]
+        [HttpGet("{mealname}/mealsummary")]
         public async Task<ActionResult<FoodSummary>> GetMealSummary([FromHeader] string userName, string mealname) {
             string ulogin = GetUserLogin(userName);
             string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
@@ -137,15 +151,19 @@ namespace APIKs.Controllers {
             return summary;
         }
 
-        [HttpGet("{date}/summary")]
-        public async Task<ActionResult<FoodSummary>> GetDaySummary([FromHeader] string userName, DateTime date) {
+        [HttpGet("{days}/daysummary")]
+        public async Task<ActionResult<FoodSummary>> GetDaySummary([FromHeader] string userName, int days) {
             string ulogin = GetUserLogin(userName);
             string dbdir = string.Concat(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(),"/DB/Users");
             string dietpath = string.Concat(dbdir,"/",ulogin,"/diet.json");
+            
 
             string dietData = await System.IO.File.ReadAllTextAsync(dietpath);
             var list = JsonConvert.DeserializeObject<List<Meal>>(dietData);
-            List<Meal> meals = list.Where( meal => meal.dateToConsume.Date == DateTime.Now.Date).ToList();
+            
+            DateTime targetdate = DateTime.Now.AddDays(days);
+            
+            List<Meal> meals = list.Where( meal => meal.DateToConsume.Date == targetdate.Date).ToList();
             FoodSummary summary = new FoodSummary();
             foreach (Meal meal in meals) {
                 foreach(int recipeid in meal.RecipeIDs) {
@@ -177,6 +195,7 @@ namespace APIKs.Controllers {
 
             return summary;
         }
+
 
         private string GetUserLogin(string userName) {
             var user = _context.Users.Where( user => user.Name == userName).First();
