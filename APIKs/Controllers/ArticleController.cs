@@ -66,7 +66,11 @@ namespace APIKs.Controllers {
             if(article == null) {
                 return NotFound();
             }
-            //Mod check
+            
+            string userLogin = _context.Users.Where( u => u.Name == userName).First().Login;
+            bool isOwner = (_context.Articles.Find(id).Author == userName) && (_context.Moderators.Any( mod => mod.Login == userLogin));
+            
+            if(!isOwner) return Forbid();
             _context.Articles.Remove(article);
 
             await _context.SaveChangesAsync();

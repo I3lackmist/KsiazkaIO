@@ -69,16 +69,14 @@ namespace APIKs.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct([FromBody] JsonElement data) {
-            string jsonstr = System.Text.Json.JsonSerializer.Serialize(data);
-            dynamic json = JsonConvert.DeserializeObject(jsonstr);
+        public async Task<ActionResult<Product>> PostProduct([FromBody] PrivateProduct data) {
             Product product = new Product { 
-                Name = json["Name"], 
-                Carbohydrates = json["Carbohydrates"],
-                Proteins = json["Proteins"],
-                Fats = json["Fats"],
-                Kcal = json["Kcal"],
-                Note = json["Note"] 
+                Name = data.Name, 
+                Carbohydrates = data.Carbohydrates,
+                Proteins = data.Proteins,
+                Fats = data.Fats,
+                Kcal = data.Kcal,
+                Note = data.Note 
             };
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
