@@ -103,7 +103,38 @@ namespace APIKs.Controllers {
             return CreatedAtAction("PostRecipe", new { id = recipe.RecipeID, name = recipe.Name, username = userName }, recipe);
         }
 
-        
+        [HttpPost("{id}/comment")]
+        public async Task<IActionResult> PostComment([FromBody] RecipeComment comment, [FromHeader] string userName, int id) {
+            comment.Author = userName;
+            comment.Date = DateTime.Now;
+            _context.RecipeComments.Add(comment);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        [HttpGet("{id}/summary")]
+        public async Task<ActionResult<FoodSummary>> GetRecipeSummary(int id) {
+            Recipe recipe = _context.Recipes.Find(id);
+            FoodSummary summary = new FoodSummary();
+
+            var recipesProducts = await _context.RecipesProducts.Where( rp => rp.RecipeID == recipe.RecipeID).ToListAsync();
+            
+            List<Product> plist = new List<Product>();
+                
+            foreach(var entry in recipesProducts) {
+                plist.Add(_context.Products.Find(entry.ProductID));
+            }
+
+            foreach(Product product in plist) {
+                summary.Carbohydrates += product.Carbohydrates;
+                summary.Fats += product.Fats;
+                summary.Proteins += product.Proteins;
+                summary.Kcal += product.Kcal;
+            }
+
+            return summary;
+        }
 
         [HttpPost("ticket")]
         public async Task<IActionResult> PostRecipeTicket([FromBody] PrivateRecipe data, [FromHeader] string userName) {

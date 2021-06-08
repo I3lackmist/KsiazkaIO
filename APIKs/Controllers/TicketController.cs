@@ -24,7 +24,7 @@ namespace APIKs.Controllers {
             _context = context;
         }
         private bool isMod(string name) {
-            string userLogin = _context.Users.Where( u => u.Equals(name)).First().Login;
+            string userLogin = _context.Users.Where( u => u.Name.Equals(name)).First().Login;
             bool is_mod = _context.Moderators.Any( mod => mod.Login.Equals(userLogin));
             return is_mod;
         }
@@ -67,7 +67,6 @@ namespace APIKs.Controllers {
                 Author = uname
             };
             _context.Recipes.Add(recipe);
-
             int idx = 0;
             foreach(int productid in precipe.ProductIDs) {
                 if(productid<0) {

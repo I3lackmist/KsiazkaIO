@@ -59,6 +59,14 @@ namespace APIKs.Controllers {
             return CreatedAtAction("PostArticle", new { id = article.ArticleID, title = article.Title, userName = userName }, article);
         }
 
+        [HttpPost("{id}/comment")]
+        public async Task<IActionResult> PostComment([FromBody] ArticleComment comment, [FromHeader] string userName, int id) {
+            comment.Author = userName;
+            comment.Date = DateTime.Now;
+            _context.ArticleComments.Add(comment);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteArticle([FromHeader] string userName, int id) {
@@ -66,7 +74,7 @@ namespace APIKs.Controllers {
             if(article == null) {
                 return NotFound();
             }
-            
+
             string userLogin = _context.Users.Where( u => u.Name == userName).First().Login;
             bool isOwner = (_context.Articles.Find(id).Author == userName) && (_context.Moderators.Any( mod => mod.Login == userLogin));
             

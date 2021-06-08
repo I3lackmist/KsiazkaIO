@@ -1,3 +1,8 @@
+Legenda: 
+/ - zrobione
+- - funkcjonalne, ale niedokonczone; zalezne od innych nieudanych
+x - nieudane
+
 Przepisy z kategorii /
 Przepisy od autora / 
 Przepisy wszystkie /
@@ -6,13 +11,16 @@ Przepis z ID /
 Kategorie w przepisie /
 Produkty w przepisie / 
 Usuniecie przepisu /
-Komentarze pod przepisami /
+Komentowanie przepisu/
+Podsumowanie wartosci odzywczej przepisu/
+Wszystkie komentarze pod przepisami /
 
 Artykuly wszystkie / 
 Artykul z ID / 
 Artykuly od autora / 
 Wyslanie artykulu / 
-Komentarze pod artykulami / 
+Komentowanie artykulu /
+Wszystkei komentarze pod artykulami / 
 Usuniecie artykulu /
 
 Dodanie produktu (z .jsona) /
@@ -28,9 +36,9 @@ Dodanie moderatora /
 
 Zarzadzanie dieta /
 
-Produkty i przepisy w jsonach na indeksach ujemnych by kontrolery mogly poznac
+Produkty i przepisy w jsonach na indeksach ujemnych by kontrolery mogly poznac -
 
-Tabela recipetickets - przepisy wymagajace zatwierdzenia
+Tabela recipetickets - przepisy wymagajace zatwierdzenia x 
 
-Login?
-Autentykacja,autoryzacja?
+Login x
+Autentykacja, autoryzacja x

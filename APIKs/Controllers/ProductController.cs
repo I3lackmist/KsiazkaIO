@@ -69,7 +69,7 @@ namespace APIKs.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct([FromBody] PrivateProduct data) {
+        public async Task<ActionResult<Product>> AddProduct([FromBody] PrivateProduct data) {
             Product product = new Product { 
                 Name = data.Name, 
                 Carbohydrates = data.Carbohydrates,
